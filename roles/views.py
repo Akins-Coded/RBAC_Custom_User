@@ -5,7 +5,10 @@ from .permissions import IsSuperUser
 
 
 class RoleViewSet(viewsets.ModelViewSet):
-    """Full CRUD on roles — superuser only."""
+    """
+    Full CRUD on roles.
+    Only superusers can manage roles.
+    """
     queryset         = Role.objects.prefetch_related('permissions')
     serializer_class = RoleSerializer
     permission_classes = [IsSuperUser]
@@ -15,7 +18,10 @@ class RoleViewSet(viewsets.ModelViewSet):
 
 
 class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
-    """List available permissions — superuser only."""
+    """
+    List available permissions.
+    Only superusers can view the full list of permissions.
+    """
     queryset         = Permission.objects.all()
     serializer_class = PermissionSerializer
     permission_classes = [IsSuperUser]

@@ -5,6 +5,14 @@ from .serializers import InvoiceSerializer
 
 
 class InvoiceViewSet(viewsets.ModelViewSet):
+    """
+    Manage invoices with RBAC protection.
+    Permissions required:
+    - List/Retrieve: invoices.view
+    - Create: invoices.create
+    - Update: invoices.edit
+    - Delete: invoices.delete
+    """
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
     permission_classes = [HasRBACPermission]

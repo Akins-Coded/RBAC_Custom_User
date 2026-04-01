@@ -4,8 +4,32 @@ from roles.permissions import IsSuperUser
 from roles.validators import validate_no_escalation
 from roles.models import Role, AuditLog
 from .models import CustomUser
+from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
 
 
+@extend_schema(
+    summary="Assign roles to a user",
+    description="Assign one or more roles to a user. Requires superuser privileges. Prevents privilege escalation.",
+    request={
+        'application/json': {
+            'type': 'object',
+            'properties': {
+                'role_ids': {
+                    'type': 'array',
+                    'items': {'type': 'integer'},
+                    'description': 'List of role IDs to assign'
+                }
+            },
+            'required': ['role_ids']
+        }
+    },
+    responses={
+        200: OpenApiTypes.OBJECT,
+        403: OpenApiTypes.OBJECT,
+        404: OpenApiTypes.OBJECT,
+    }
+)
 @api_view(['POST'])
 @permission_classes([IsSuperUser])
 def assign_roles(request, user_id):

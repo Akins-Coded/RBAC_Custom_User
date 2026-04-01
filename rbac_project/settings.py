@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'roles',
     'invoices',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'RBAC API',
+    'DESCRIPTION': 'Role-Based Access Control API with Custom User Model',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
