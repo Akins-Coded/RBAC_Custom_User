@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: RBAC API
+  title: CODED-RBAC API
   version: 1.0.0
-  description: Role-Based Access Control API with Custom User Model
+  description: Role-Based Access Control API with Custom User Model by Akins-Coded for reUse
 paths:
   /api/invoices/:
     get:
